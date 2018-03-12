@@ -1,0 +1,23 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.root{
+
+}
+
+.btn {
+  -fx-background: #3498db;
+  -fx-background-color: linear-gradient(to bottom, #3498db, #2980b9);
+  -fx-background-radius: 100,100,100,100;
+  -fx-font-family: Arial;
+  -fx-text-fill: White;
+  -fx-font-weight: bold;
+  -fx-font-size: 18;
+}
+
+
+.btn:hover {
+  -fx-background: #3cb0fd;
+  -fx-background-color: linear-gradient(to bottom, #3cb0fd, #3498db);
+}
