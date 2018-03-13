@@ -25,7 +25,7 @@ public class MainWindowController implements Initializable {
     
     @FXML
     public void play(){
-        
+        Game g = new Game();
     }
     
     
