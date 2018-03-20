@@ -31,7 +31,7 @@ public class World_infection extends Application{
         fl.setController(new MainWindowController());
         Parent root = fl.load();
                 
-        Scene scene = new Scene(root, 800, 700);
+        Scene scene = new Scene(root, 800, 800);
 
         stage.setTitle("World Infection");
         stage.setScene(scene);

@@ -43,6 +43,11 @@ public class Game {
             rules();
             cpt++;
             System.out.println("Tour numero "+ cpt +" terminé ! ");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                System.err.println("Failed to sleep");
+            }
         }
         
         if(iList.isEmpty()){
@@ -67,6 +72,15 @@ public class Game {
               
         }
     }
+    
+    public int getRemainingHealthy(){
+        return this.hList.size();
+    } 
+    
+    public int getRemainingInfected(){
+        return this.iList.size();
+    } 
+
 
     private void generatePeople(int nbH, int nbI) {
         int x,y;

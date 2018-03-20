@@ -36,11 +36,14 @@
         <RowConstraints minHeight="10.0" percentHeight="5.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>            
-        <Button onAction="#play"  styleClass="btn" GridPane.columnIndex="6" GridPane.rowIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
-                
+        <javafx.scene.text.Text fx:id="title" text="World Infection" GridPane.columnIndex="0" GridPane.columnSpan="11" GridPane.rowIndex="0"  GridPane.halignment="CENTER" />
         
+        <javafx.scene.canvas.Canvas fx:id="canvas" GridPane.columnIndex="1" GridPane.columnSpan="8"  GridPane.rowIndex="1" GridPane.rowSpan="8" />    
+        
+        <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>            
+        <Button onAction="#play"  styleClass="btn" GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
     </children>
 </GridPane>
