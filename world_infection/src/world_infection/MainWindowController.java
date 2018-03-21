@@ -10,8 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 /**
  * FXML Controller class
@@ -21,23 +21,26 @@ import javafx.scene.paint.Paint;
 public class MainWindowController implements Initializable {
 
     @FXML
-    private Canvas canvas;
+    private Pane pane;
     
     
     @FXML
     public void reset(){
-        GraphicsContext g = canvas.getGraphicsContext2D();
-        g.rect(1, 1, 2, 2);
-        g.setFill(Color.RED);
-        //TEST EN COURS 
+        System.err.println("Reset pressed");
+        final Canvas c = new Canvas(500,500);
+        GraphicsContext gc = c.getGraphicsContext2D();
+
+        gc.setFill(Color.BLUE);
+        gc.fillRect(75,75,100,100);
+        
+        pane.getChildren().add(c);
     }
     
     @FXML
     public void play(){
-        Game g = new Game();
+        Game g = new Game(pane);
     }
-    
-    
+        
     
     /**
      * Initializes the controller class.

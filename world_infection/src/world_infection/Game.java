@@ -7,6 +7,9 @@ package world_infection;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -15,14 +18,16 @@ import java.util.List;
 public class Game {
     
     private City city;
-    private MersenneTwister mt;
+    private MersenneTwister mt = new MersenneTwister();
+    private Pane pane;
     private List<HealthyPerson> hList = new ArrayList<>();
     private List<InfectedPerson> iList = new ArrayList<>();
     private List<Person> globalList = new ArrayList<>();
     private int cpt = 0;
     
     
-    public Game() {
+    public Game(Pane pane) {
+        this.pane = pane;
         this.city = new City(16, 16);
         generatePeople(20,1);
     }
@@ -41,6 +46,7 @@ public class Game {
         while(iList.isEmpty() || hList.isEmpty()){
             move();
             rules();
+            display();
             cpt++;
             System.out.println("Tour numero "+ cpt +" terminé ! ");
             try {
@@ -71,6 +77,20 @@ public class Game {
             //if(!city.getCase(x-1, y-1).isEmpty() && city.getCase(x-1, y-1).getPerson().getClass().equals(HealthyPerson))
               
         }
+    }
+    
+    private void display(){
+        Canvas canvas = new Canvas();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        int i,j;
+        
+        for(i = 0; i < city.getSizeX(); i++){
+            for(j = 0; j < city.getSizeY(); j++){
+                city.getCase(i, j).displayOn(gc);
+            }
+        }
+        
+        pane.getChildren().add(canvas);
     }
     
     public int getRemainingHealthy(){

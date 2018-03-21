@@ -37,13 +37,33 @@
         <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
         <javafx.scene.text.Text fx:id="title" text="World Infection" GridPane.columnIndex="0" GridPane.columnSpan="11" GridPane.rowIndex="0"  GridPane.halignment="CENTER" />
         
-        <javafx.scene.canvas.Canvas fx:id="canvas" GridPane.columnIndex="1" GridPane.columnSpan="8"  GridPane.rowIndex="1" GridPane.rowSpan="8" />    
+        <Pane fx:id="pane" GridPane.columnIndex="1" GridPane.columnSpan="9" GridPane.rowIndex="1" GridPane.rowSpan="10" />
         
-        <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>            
-        <Button onAction="#play"  styleClass="btn" GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="12" GridPane.columnSpan="4" GridPane.rowSpan="2"  >
+            <Label text="Healthy personne number :" wrapText="true" />
+            <Spinner fx:id="heathlyPersonneNumber" editable="true" >
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="25" amountToStepBy="1"/>
+                </valueFactory>
+            </Spinner>
+        </HBox>   
+        
+        <HBox GridPane.columnIndex="6" GridPane.rowIndex="12" GridPane.columnSpan="4" GridPane.rowSpan="2" >
+            <Label text="Infected personne number :" wrapText="true" />
+            <Spinner fx:id="infectedPersonneNumber" editable="true" >
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="1" amountToStepBy="1"/>
+                </valueFactory>
+            </Spinner>
+        </HBox> 
+        
+        <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="3" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>            
+        <Button onAction="#play"  styleClass="btn" GridPane.columnIndex="6" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
     </children>
 </GridPane>

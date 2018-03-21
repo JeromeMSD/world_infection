@@ -5,6 +5,9 @@
  */
 package world_infection;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author jeromem
@@ -48,8 +51,17 @@ public class Case {
         return false;
     }
 
-    void setPerson(Person p) {
+    public void setPerson(Person p) {
         this.person = p;
+    }
+    
+    public void displayOn(GraphicsContext gc){
+        if (person.getClass().equals(HealthyPerson.class))
+            gc.setFill(Color.BLUE);
+        else if(person.getClass().equals(InfectedPerson.class)){
+            gc.setFill(Color.RED);
+        }
+        gc.fillRect(x, y, 2, 2);
     }
     
     

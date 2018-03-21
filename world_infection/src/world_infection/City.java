@@ -19,10 +19,9 @@ public class City {
     public City(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        
-        tab = new Case[sizeX][sizeY];
+        this.tab = new Case[sizeX][sizeY];
     }
-
+    
     boolean isEmpty(int x, int y) {
         return tab[x][y].isEmpty();
     }
@@ -38,8 +37,5 @@ public class City {
     Case getCase(int x, int y) {
         return this.tab[x][y];
     }
-    
-    
-    
-    
+
 }
