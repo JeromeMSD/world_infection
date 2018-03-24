@@ -53,16 +53,7 @@ public class Case {
         this.person = p;
     }
     
-    public GraphicsContext displayOn(GraphicsContext gc){
-        if (person.getClass().equals(HealthyPerson.class))
-            gc.setFill(Color.BLUE);
-        else if(person.getClass().equals(InfectedPerson.class)){
-            gc.setFill(Color.RED);
-        }
-        gc.fillRect(x, y, 2, 2);
-        
-        return gc;
-    }
+    
     
     @Override
     public String toString(){

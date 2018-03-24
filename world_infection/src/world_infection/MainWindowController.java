@@ -33,7 +33,14 @@ public class MainWindowController implements Initializable {
     
     @FXML
     public void play(){
-        g.play();
+        Canvas c = new Canvas(400,400);
+        
+        GraphicsContext gc = c.getGraphicsContext2D();
+        gc.setFill(Color.AQUA);
+        gc.fillRect(10, 10,100, 100);
+        gc.fill();
+        
+        pane.getChildren().add(c);
     }
         
     

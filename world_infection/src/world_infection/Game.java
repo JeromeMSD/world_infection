@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -28,13 +29,16 @@ public class Game {
     
     public Game(Pane pane) {
         this.pane = pane;
+        cleanDisplay();
         this.city = new City(16, 16);
-        generatePeople(5,1);
+        generatePeople(50,1);
         display();
     }
 
     public Game(City city) {
+        cleanDisplay();
         this.city = city;
+        
         generatePeople(50,1);
         display();
     }
@@ -82,14 +86,15 @@ public class Game {
     }
     
     private void display(){
-        Canvas canvas = new Canvas();
+        Canvas canvas = new Canvas(city.getSizeX()*100, city.getSizeY()*100);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         int i,j;
+        
         
         for(i = 0; i < city.getSizeX(); i++){
             for(j = 0; j < city.getSizeY(); j++){
                 if(!city.isEmpty(i, j))
-                    gc = city.getCase(i, j).displayOn(gc);
+                    city.displayOn(gc);
             }
         }
         
@@ -104,6 +109,10 @@ public class Game {
         return this.iList.size();
     } 
 
+    public void cleanDisplay(){
+       if(!pane.getChildren().isEmpty())
+            pane.getChildren().remove(0);
+    }
 
     private void generatePeople(int nbH, int nbI) {
         int x,y;
