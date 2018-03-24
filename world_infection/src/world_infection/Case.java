@@ -16,7 +16,7 @@ public class Case {
     public int x;
     public int y;
     private Boolean exit;
-    private Person person;
+    private Person person = null;
 
     public Case(int x, int y, Boolean exit, Person person) {
         this.x = x;
@@ -46,23 +46,32 @@ public class Case {
     }
 
     public Boolean isEmpty() {
-        if(person == null)
-            return true;
-        return false;
+        return person == null;
     }
 
     public void setPerson(Person p) {
         this.person = p;
     }
     
-    public void displayOn(GraphicsContext gc){
+    public GraphicsContext displayOn(GraphicsContext gc){
         if (person.getClass().equals(HealthyPerson.class))
             gc.setFill(Color.BLUE);
         else if(person.getClass().equals(InfectedPerson.class)){
             gc.setFill(Color.RED);
         }
         gc.fillRect(x, y, 2, 2);
+        
+        return gc;
     }
     
-    
+    @Override
+    public String toString(){
+        String str;
+        if (person == null) {
+            str = "NULL";
+        }else {
+            str = person.toString();
+        }
+        return "["+ x +"]["+ y +"] -> Sortie:"+ exit.toString() +" | "+ str;
+    }
 }

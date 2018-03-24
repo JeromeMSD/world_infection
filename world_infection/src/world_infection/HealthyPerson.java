@@ -34,8 +34,11 @@ public class HealthyPerson extends Person{
         Case c  = city.getCase(x,y);
         c.setPerson(this);
         this.curCase = c;
-                
-        
     }   
+    
+    @Override
+    public String toString(){
+        return "Healthy person";
+    }
     
 }

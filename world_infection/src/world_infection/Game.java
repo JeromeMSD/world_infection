@@ -29,12 +29,14 @@ public class Game {
     public Game(Pane pane) {
         this.pane = pane;
         this.city = new City(16, 16);
-        generatePeople(20,1);
+        generatePeople(5,1);
+        display();
     }
 
     public Game(City city) {
         this.city = city;
         generatePeople(50,1);
+        display();
     }
     
     public Game(City city,int nbH,int nbI) {
@@ -86,7 +88,8 @@ public class Game {
         
         for(i = 0; i < city.getSizeX(); i++){
             for(j = 0; j < city.getSizeY(); j++){
-                city.getCase(i, j).displayOn(gc);
+                if(!city.isEmpty(i, j))
+                    gc = city.getCase(i, j).displayOn(gc);
             }
         }
         
@@ -106,11 +109,11 @@ public class Game {
         int x,y;
         for(int i = 0; i < nbH; i++){
             HealthyPerson h = new HealthyPerson();
-            do{
+            //do{
                 x = mt.nextInt(city.getSizeX());
                 y = mt.nextInt(city.getSizeY());
-            }while(city.isEmpty(x,y));
-            
+            //}while(city.isEmpty(x,y));
+            System.out.println(x+" "+y);
             h.curCase = city.getCase(x, y);
             city.getCase(x, y).setPerson(h);
             
@@ -121,10 +124,10 @@ public class Game {
         for(int i = 0; i < nbI; i++){
             InfectedPerson in = new InfectedPerson();
             
-            do{
+            //do{
                 x = mt.nextInt(city.getSizeX());
                 y = mt.nextInt(city.getSizeY());
-            }while(city.isEmpty(x,y));
+            //}while(city.isEmpty(x,y));
             
             in.curCase = city.getCase(x, y);
             city.getCase(x, y).setPerson(in);

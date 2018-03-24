@@ -23,22 +23,17 @@ public class MainWindowController implements Initializable {
     @FXML
     private Pane pane;
     
+    private Game g;
+    
     
     @FXML
     public void reset(){
-        System.err.println("Reset pressed");
-        final Canvas c = new Canvas(500,500);
-        GraphicsContext gc = c.getGraphicsContext2D();
-
-        gc.setFill(Color.BLUE);
-        gc.fillRect(75,75,100,100);
-        
-        pane.getChildren().add(c);
+        g = new Game(pane);
     }
     
     @FXML
     public void play(){
-        Game g = new Game(pane);
+        g.play();
     }
         
     

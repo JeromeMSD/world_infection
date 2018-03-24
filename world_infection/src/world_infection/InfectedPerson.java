@@ -42,5 +42,9 @@ public class InfectedPerson extends Person{
     }
     
     
+    @Override
+    public String toString(){
+        return "Infected person";
+    }
     
 }
