@@ -7,6 +7,8 @@ package world_infection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -16,7 +18,7 @@ import javafx.scene.paint.Color;
  *
  * @author jeromem
  */
-public class Game {
+public class Game{
     
     private City city;
     private MersenneTwister mt = new MersenneTwister();
@@ -30,15 +32,14 @@ public class Game {
     public Game(Pane pane) {
         this.pane = pane;
         cleanDisplay();
-        this.city = new City(16, 16);
-        generatePeople(50,1);
+        this.city = new City(20, 20);
+        generatePeople(100,1);
         display();
     }
 
     public Game(City city) {
         cleanDisplay();
         this.city = city;
-        
         generatePeople(50,1);
         display();
     }
@@ -49,17 +50,20 @@ public class Game {
     }
     
     public void play(){
-        while(iList.isEmpty() || hList.isEmpty()){
+        while(!iList.isEmpty() || !hList.isEmpty()){
+            cleanDisplay();
             move();
             rules();
             display();
-            cpt++;
-            System.out.println("Tour numero "+ cpt +" terminé ! ");
+            
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                System.err.println("Failed to sleep");
+                System.err.println(ex.getMessage());
             }
+            
+            cpt++;
+            System.out.println("Tour numero "+ cpt +" terminé ! ");
         }
         
         if(iList.isEmpty()){
@@ -71,8 +75,9 @@ public class Game {
     }
 
     private void move() {
-        for(Person p : globalList)
+        for(Person p : globalList){
             p.move(city);
+        }
     }
 
     private void rules(){
@@ -110,7 +115,7 @@ public class Game {
     } 
 
     public void cleanDisplay(){
-       if(!pane.getChildren().isEmpty())
+       while(!pane.getChildren().isEmpty())
             pane.getChildren().remove(0);
     }
 
@@ -118,11 +123,11 @@ public class Game {
         int x,y;
         for(int i = 0; i < nbH; i++){
             HealthyPerson h = new HealthyPerson();
-            //do{
+            do{
                 x = mt.nextInt(city.getSizeX());
                 y = mt.nextInt(city.getSizeY());
-            //}while(city.isEmpty(x,y));
-            System.out.println(x+" "+y);
+            }while(!city.isEmpty(x,y));
+            
             h.curCase = city.getCase(x, y);
             city.getCase(x, y).setPerson(h);
             
@@ -133,10 +138,10 @@ public class Game {
         for(int i = 0; i < nbI; i++){
             InfectedPerson in = new InfectedPerson();
             
-            //do{
+            do{
                 x = mt.nextInt(city.getSizeX());
                 y = mt.nextInt(city.getSizeY());
-            //}while(city.isEmpty(x,y));
+            }while(!city.isEmpty(x,y));
             
             in.curCase = city.getCase(x, y);
             city.getCase(x, y).setPerson(in);

@@ -19,24 +19,42 @@ public class InfectedPerson extends Person{
 
     @Override
     public void move(City city) {
-        int unit=mt.nextInt(this.maxMove)+1;
-        int x,y;
-        do{
-            x = mt.next(unit);
-            y = mt.next(unit);
+        int x,y,newX,newY;
+        int unit = mt.nextInt(this.maxMove);
 
-            if(mt.nextBoolean()){
-                x = curCase.x-x;
-            }
-            if(mt.nextBoolean()){
-                y = curCase.y-y;
-            }
-            
-        }while(city.isEmpty(x,y) && ( x < city.getSizeX() && x >= 0) && ( y < city.getSizeY() && y >= 0 ));
+        if(unit == 0)
+            unit = 1;
         
-        Case c  = city.getCase(x,y);
-        c.setPerson(this);
-        this.curCase = c;
+        if (mouvementLeft > 0){
+        
+            do{
+                x = mt.nextInt(unit);
+
+
+                if(mt.nextBoolean()){
+                    newX = this.curCase.x-x;
+                }else{
+                    newX = this.curCase.x+x;
+                }
+
+            }while(newX < 0 || newX > city.getSizeX()-1);
+
+            do{
+                y = mt.nextInt(unit);
+
+                if(mt.nextBoolean()){
+                    newY = this.curCase.y-y;
+                }else{
+                    newY = this.curCase.y+y;
+                }
+
+            }while(newY < 0 || newY > city.getSizeY()-1);
+
+
+            Case c  = city.getCase(newX, newY);
+            c.setPerson(this);
+            this.curCase = c;
+        }
         
         mouvementLeft--;
     }

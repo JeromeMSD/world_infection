@@ -15,7 +15,7 @@ public abstract class Person {
     protected double moveProbability;
     protected double exitCity;
     protected Case curCase;
-    protected MersenneTwister mt;
+    protected MersenneTwister mt = new MersenneTwister();
 
     public Person(int minMove, int maxMove, double moveProbability, double exitCity) {
         this.minMove = minMove;

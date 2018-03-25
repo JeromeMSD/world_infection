@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package world_infection;
+
+import static java.lang.Math.abs;
+
 /**
  *
  * @author jeromem
@@ -13,27 +16,47 @@ public class HealthyPerson extends Person{
     public HealthyPerson() {
         super(1,6,1.0,0.5);
     }
+    
+    
+    //REVOIR TOUTE LA NOTION DE MOUVEMENT
 
     @Override
     public void move(City city) {
-        int unit=mt.nextInt(this.maxMove)+1;
-        int x,y;
+        int x,y,newX,newY;
+        
+        int unit = mt.nextInt(this.maxMove);
+        
+        if(unit == 0)
+            unit = 1;
+        
         do{
-            x = mt.next(unit);
-            y = mt.next(unit);
-
+            x = mt.nextInt(unit);
+            
+            
             if(mt.nextBoolean()){
-                x = curCase.x-x;
-            }
-            if(mt.nextBoolean()){
-                y = curCase.y-y;
+                newX = this.curCase.x-x;
+            }else{
+                newX = this.curCase.x+x;
             }
             
-        }while(city.isEmpty(x,y) && ( x < city.getSizeX() && x >= 0) && ( y < city.getSizeY() && y >= 0 ));
+        }while(newX < 0 || newX > city.getSizeX()-1);
         
-        Case c  = city.getCase(x,y);
+        do{
+            y = mt.nextInt(unit);
+
+            if(mt.nextBoolean()){
+                newY = this.curCase.y-y;
+            }else{
+                newY = this.curCase.y+y;
+            }
+            
+        }while(newY < 0 || newY > city.getSizeY()-1);
+        
+
+        Case c  = city.getCase(newX, newY);
         c.setPerson(this);
         this.curCase = c;
+
     }   
     
     @Override

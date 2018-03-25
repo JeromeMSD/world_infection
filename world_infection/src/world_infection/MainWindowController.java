@@ -8,10 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -33,14 +30,7 @@ public class MainWindowController implements Initializable {
     
     @FXML
     public void play(){
-        Canvas c = new Canvas(400,400);
-        
-        GraphicsContext gc = c.getGraphicsContext2D();
-        gc.setFill(Color.AQUA);
-        gc.fillRect(10, 10,100, 100);
-        gc.fill();
-        
-        pane.getChildren().add(c);
+        g.play();
     }
         
     
