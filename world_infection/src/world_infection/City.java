@@ -84,4 +84,18 @@ public class City {
             }
         } 
     }
+
+    public String displayText() {
+        int i,j;
+        String str = "";
+        
+        for(i = 0; i < sizeX; i++){
+            for(j = 0; j < sizeY; j++){
+                str += tab[i][j].printInTab();
+            }
+            str += "\n";
+        }
+        
+        return str;
+    }
 }

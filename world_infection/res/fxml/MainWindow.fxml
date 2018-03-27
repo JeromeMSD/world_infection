@@ -63,7 +63,11 @@
             </Spinner>
         </HBox> 
         
-        <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="3" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>            
-        <Button onAction="#play"  styleClass="btn" GridPane.columnIndex="6" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
+        <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="2" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>
+        <VBox GridPane.columnIndex="5" GridPane.rowIndex="13" alignment="CENTER" >
+            <Label text="Tour"/>
+            <Label fx:id="counter" text="0" />
+        </VBox>            
+        <Button fx:id="play" onAction="#play"  styleClass="btn" GridPane.columnIndex="7" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
     </children>
 </GridPane>

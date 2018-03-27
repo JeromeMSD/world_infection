@@ -7,54 +7,56 @@ package world_infection;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.application.Platform;
 
 /**
  *
  * @author jeromem
  */
-public class Game{
+public class Game implements Runnable{
     
     private City city;
     private MersenneTwister mt = new MersenneTwister();
-    private Pane pane;
     private List<HealthyPerson> hList = new ArrayList<>();
     private List<InfectedPerson> iList = new ArrayList<>();
     private List<Person> globalList = new ArrayList<>();
     private int cpt = 0;
+    private boolean running = false;
+    private MainWindowController mwc;
     
-    
-    public Game(Pane pane) {
-        this.pane = pane;
-        cleanDisplay();
+    public Game(MainWindowController mwc) {
+        this.mwc = mwc;
+        
+        this.mwc.cleanDisplay();
         this.city = new City(20, 20);
-        generatePeople(100,1);
-        display();
+        generatePeople(5,1);
+        this.mwc.display(city);
     }
 
     public Game(City city) {
-        cleanDisplay();
+        this.mwc.cleanDisplay();
         this.city = city;
         generatePeople(50,1);
-        display();
+        this.mwc.display(city);
     }
     
-    public Game(City city,int nbH,int nbI) {
-        this.city = city;
+    public Game(MainWindowController mwc ,int nbH,int nbI) {
+        this.mwc = mwc;
+        this.city = new City(nbH,nbH);
         generatePeople(nbH,nbI);
+        this.mwc.cleanDisplay();
+        this.mwc.display(city);
     }
     
-    public void play(){
+    
+    public void run(){
+        this.running = true;
         while(!iList.isEmpty() || !hList.isEmpty()){
-            cleanDisplay();
+            if(!this.isRunning())
+                break;
             move();
             rules();
-            display();
+            displayText();
             
             try {
                 Thread.sleep(1000);
@@ -63,15 +65,25 @@ public class Game{
             }
             
             cpt++;
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    mwc.setCpt(cpt);
+                    mwc.cleanDisplay();
+                    mwc.display(city);
+                }
+            });
             System.out.println("Tour numero "+ cpt +" terminé ! ");
         }
         
         if(iList.isEmpty()){
             System.out.println("Humanity survived to infection !");
-        }else{
+        }else if(hList.isEmpty()){
             System.out.println("Infected killed everyone !");
-        } 
-            
+        }else{
+            System.out.println("Game stopped by user !");
+        }
+        
     }
 
     private void move() {
@@ -79,7 +91,8 @@ public class Game{
             p.move(city);
         }
     }
-
+    
+    // LES REGLES C4EST LA MICHEL !
     private void rules(){
         for(InfectedPerson i : iList){
             int x = i.curCase.x;
@@ -90,20 +103,8 @@ public class Game{
         }
     }
     
-    private void display(){
-        Canvas canvas = new Canvas(city.getSizeX()*100, city.getSizeY()*100);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        int i,j;
-        
-        
-        for(i = 0; i < city.getSizeX(); i++){
-            for(j = 0; j < city.getSizeY(); j++){
-                if(!city.isEmpty(i, j))
-                    city.displayOn(gc);
-            }
-        }
-        
-        pane.getChildren().add(canvas);
+    private void displayText(){
+        System.out.println(city.displayText());
     }
     
     public int getRemainingHealthy(){
@@ -113,11 +114,6 @@ public class Game{
     public int getRemainingInfected(){
         return this.iList.size();
     } 
-
-    public void cleanDisplay(){
-       while(!pane.getChildren().isEmpty())
-            pane.getChildren().remove(0);
-    }
 
     private void generatePeople(int nbH, int nbI) {
         int x,y;
@@ -151,5 +147,14 @@ public class Game{
         }
         
     }
-    
+
+    public void stop() {
+        this.running = false;
+    }
+
+    private boolean isRunning() {
+        return this.running;
+    }
+
+
 }

@@ -6,10 +6,12 @@
 package world_infection;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -33,6 +35,10 @@ public class World_infection extends Application{
                 
         Scene scene = new Scene(root, 800, 800);
 
+        stage.setOnCloseRequest((WindowEvent t) -> {
+            System.exit(0);
+        });
+        
         stage.setTitle("World Infection");
         stage.setScene(scene);
         stage.show();

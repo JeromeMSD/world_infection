@@ -5,7 +5,6 @@
  */
 package world_infection;
 
-import static java.lang.Math.abs;
 
 /**
  *
@@ -49,12 +48,13 @@ public class HealthyPerson extends Person{
             }else{
                 newY = this.curCase.y+y;
             }
-            
         }while(newY < 0 || newY > city.getSizeY()-1);
         
-
+        
+        
         Case c  = city.getCase(newX, newY);
         c.setPerson(this);
+        this.curCase.setPerson(null);
         this.curCase = c;
 
     }   

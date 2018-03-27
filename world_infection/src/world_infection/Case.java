@@ -5,9 +5,6 @@
  */
 package world_infection;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
 /**
  *
  * @author jeromem
@@ -53,8 +50,6 @@ public class Case {
         this.person = p;
     }
     
-    
-    
     @Override
     public String toString(){
         String str;
@@ -64,5 +59,15 @@ public class Case {
             str = person.toString();
         }
         return "["+ x +"]["+ y +"] -> Sortie:"+ exit.toString() +" | "+ str;
+    }
+
+    public String printInTab() {
+        if(person != null){
+            if(person.getClass().equals(HealthyPerson.class))
+                return "H";
+            else if(person.getClass().equals(InfectedPerson.class))
+                return "I";
+        }
+        return ".";
     }
 }

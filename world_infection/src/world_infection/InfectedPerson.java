@@ -27,6 +27,7 @@ public class InfectedPerson extends Person{
         
         if (mouvementLeft > 0){
         
+            
             do{
                 x = mt.nextInt(unit);
 
@@ -38,7 +39,7 @@ public class InfectedPerson extends Person{
                 }
 
             }while(newX < 0 || newX > city.getSizeX()-1);
-
+            
             do{
                 y = mt.nextInt(unit);
 
@@ -49,10 +50,10 @@ public class InfectedPerson extends Person{
                 }
 
             }while(newY < 0 || newY > city.getSizeY()-1);
-
-
+            
             Case c  = city.getCase(newX, newY);
             c.setPerson(this);
+            this.curCase.setPerson(null);
             this.curCase = c;
         }
         

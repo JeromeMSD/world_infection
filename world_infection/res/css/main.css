@@ -39,3 +39,7 @@
   -fx-background: #3cb0fd;
   -fx-background-color: linear-gradient(to bottom, #3cb0fd, #3498db);
 }
+
+#counter{
+    -fx-font-size:28;
+}
