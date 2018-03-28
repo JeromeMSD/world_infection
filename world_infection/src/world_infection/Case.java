@@ -67,6 +67,10 @@ public class Case {
                 return "H";
             else if(person.getClass().equals(InfectedPerson.class))
                 return "I";
+            else if(person.getClass().equals(DoctorPerson.class))
+                return "M";
+            else if(person.getClass().equals(DeadPerson.class))
+                return "D";
         }
         return ".";
     }

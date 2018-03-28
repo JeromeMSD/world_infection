@@ -5,18 +5,16 @@
  */
 package world_infection;
 
-
 /**
  *
  * @author jeromem
  */
-public class HealthyPerson extends Person{
-    
-    public HealthyPerson() {
-        super(1,6,1.0,0.5);
+public class DoctorPerson extends Person{
+
+    public DoctorPerson() {
+        super(1, 6, 0.5, 1);
     }
-    
-    
+
     @Override
     public void move(City city) {
         int x,y,newX,newY;
@@ -61,5 +59,6 @@ public class HealthyPerson extends Person{
     public String toString(){
         return "Healthy person";
     }
+    
     
 }

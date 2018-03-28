@@ -5,7 +5,6 @@
  */
 package world_infection;
 
-import com.sun.prism.paint.Gradient;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -61,6 +60,10 @@ public class City {
                         gc.setFill(Color.BLUE);
                     else if(getCase(i, j).getPerson().getClass().equals(InfectedPerson.class)){
                         gc.setFill(Color.RED);
+                    }else if(getCase(i, j).getPerson().getClass().equals(DoctorPerson.class)){
+                        gc.setFill(Color.GREEN);
+                    }else if(getCase(i, j).getPerson().getClass().equals(InfectedPerson.class)){
+                        gc.setFill(Color.BLACK);
                     }
 
                     if(i == 0 && j == 0)
