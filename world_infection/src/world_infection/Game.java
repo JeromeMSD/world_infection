@@ -94,13 +94,48 @@ public class Game implements Runnable{
     
     // LES REGLES C4EST LA MICHEL !
     private void rules(){
-        for(InfectedPerson i : iList){
+        for(HealthyPerson i : hList){
             int x = i.curCase.x;
             int y = i.curCase.y;
+            int infection =0;
+            /*
+            if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x-1, y).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x, y-1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x-1, y+1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x+1, y).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x, y+1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x+1, y+1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x+1, y-1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
             
-            //if(!city.getCase(x-1, y-1).isEmpty() && city.getCase(x-1, y-1).getPerson().getClass().equals(HealthyPerson))
-              
+            if(infection>=3){
+                // TRANSFORMER HEALTHY EN INFECTED !
+                infectedPerson inf = New InfectedPersonne(i);
+                // Supprimer healthyPerson de la liste, ajouter infectedPerson dans la liste !
+            }
+             
         }
+        /*
+        for(InfectedPerson i : List){
+            
+        }
+        */
     }
     
     private void displayText(){
