@@ -50,6 +50,11 @@ public class City {
         return this.tab[x][y];
     }
 
+    public Case getCase(Case c){
+        return tab[c.x][c.y];
+    }
+
+    
     public void displayOn(GraphicsContext gc){
         int i,j;
                 
@@ -62,7 +67,7 @@ public class City {
                         gc.setFill(Color.RED);
                     }else if(getCase(i, j).getPerson().getClass().equals(DoctorPerson.class)){
                         gc.setFill(Color.GREEN);
-                    }else if(getCase(i, j).getPerson().getClass().equals(InfectedPerson.class)){
+                    }else if(getCase(i, j).getPerson().getClass().equals(DeadPerson.class)){
                         gc.setFill(Color.BLACK);
                     }
 

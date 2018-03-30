@@ -15,6 +15,16 @@ public class DeadPerson extends Person{
         super(0, 0, 0, 0);
     }
 
+    public DeadPerson(InfectedPerson i){
+        super(0, 0, 0, 0);
+        this.curCase = i.curCase;
+    }
+    
+    public DeadPerson(DoctorPerson d){
+        super(0, 0, 0, 0);
+        this.curCase = d.curCase;
+    }
+    
     @Override
     public void move(City city) {
         System.out.println("Les morts ne bouge pas..");

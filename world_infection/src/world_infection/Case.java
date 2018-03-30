@@ -33,7 +33,7 @@ public class Case {
         this.y = y;
         this.exit = false;
     }
-
+    
     public Person getPerson(){
         return person;
     }

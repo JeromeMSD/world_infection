@@ -16,6 +16,11 @@ public class HealthyPerson extends Person{
         super(1,6,1.0,0.5);
     }
     
+    public HealthyPerson(InfectedPerson i) {
+        super(1,6,1.0,0.5);
+        this.curCase = i.curCase;
+    }
+    
     
     @Override
     public void move(City city) {

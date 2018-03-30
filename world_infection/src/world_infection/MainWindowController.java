@@ -5,15 +5,32 @@
  */
 package world_infection;
 import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -38,19 +55,65 @@ public class MainWindowController implements Initializable {
     
     @FXML
     public void reset(){
-        g = new Game(this);
+        g = new Game(this,(Integer) heathlyPersonneNumber.getValue(), (Integer) infectedPersonneNumber.getValue());
         gameThread = new Thread(g);
     }
     
     @FXML
     public void play(){
-        if(play.getText().equals("Play")){
-            gameThread.start();
-            play.setText("Stop");
-        }else{
-            play.setText("Play");
-            g.stop();
+        try{
+            if(play.getText().equals("Play")){
+                gameThread.start();
+                play.setText("Stop");
+            }else if(play.getText().equals("Resume")){
+                play.setText("Stop");
+                g.resume();
+                gameThread = new Thread(g);
+                gameThread.start();
+            }else{
+                play.setText("Resume");
+                g.stop();
+            }
+        }catch(NullPointerException e){
+            Stage stage = new Stage();
+        stage.setTitle("Connection");
+        
+        
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
+        
+        Text scenetitle = new Text("Action impossible !");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        scenetitle.setId("title");
+        
+        
+        Label question = new Label("Pour lancer la simlation vous devez tout d'abord initialiser un Jeu ! ");
+        question.setWrapText(true);
+        grid.add(question, 0, 1,3,3);
+
+        Button btn = new Button("Ok");
+        grid.add(btn, 3, 5);
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                    stage.close();
+            }
+        });
+
+        
+        Scene scene = new Scene(grid, 400, 200);
+        scene.getStylesheets().add(MainWindowController.class.getResource("/css/main.css").toExternalForm());
+        stage.setScene(scene);
+        
+        stage.showAndWait();
         }
+            
     }
     
         
