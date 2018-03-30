@@ -94,11 +94,11 @@ public class Game implements Runnable{
     
     // LES REGLES C4EST LA MICHEL !
     private void rules(){
+        /*
         for(HealthyPerson i : hList){
             int x = i.curCase.x;
             int y = i.curCase.y;
             int infection =0;
-            /*
             if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson)){
                 infection ++;
             }
@@ -128,12 +128,119 @@ public class Game implements Runnable{
                 // TRANSFORMER HEALTHY EN INFECTED !
                 infectedPerson inf = New InfectedPersonne(i);
                 // Supprimer healthyPerson de la liste, ajouter infectedPerson dans la liste !
-            }
-             
+            }   
         }
-        /*
-        for(InfectedPerson i : List){
+        
+        for(DoctorPerson i : mList){
+            int x = i.curCase.x;
+            int y = i.curCase.y;
+            int infection =0;
+            if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x-1, y).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x, y-1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x-1, y+1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x+1, y).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x, y+1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x+1, y+1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
+            if(city.getCase(x+1, y-1).getPerson().getClass().equals(InfectedPerson)){
+                infection ++;
+            }
             
+            if(infection>=5){
+                // DOCTOR CONDAMNED !
+                if (DeathCounter <= 10){
+                    //ALREADY CONDAMN
+                    deathCounter = deathCounter -3;
+                }else{
+                    deathCounter = 10;
+                }
+            }else{
+                //Soigne infectés en contact direct
+                if(city.getCase(x-1, y).getPerson().getClass().equals(InfectedPerson)){
+                    // TRANSFORMER INFECTED EN HEALTHY !
+                    HealthyPerson pers = New HealthyPersonne(i);
+                    // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+                }
+                if(city.getCase(x, y-1).getPerson().getClass().equals(InfectedPerson)){
+                    // TRANSFORMER INFECTED EN HEALTHY !
+                    HealthyPerson pers = New HealthyPersonne(i);
+                    // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+                }
+                if(city.getCase(x+1, y).getPerson().getClass().equals(InfectedPerson)){
+                    // TRANSFORMER INFECTED EN HEALTHY !
+                    HealthyPerson pers = New HealthyPersonne(i);
+                    // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+                }
+                if(city.getCase(x, y+1).getPerson().getClass().equals(InfectedPerson)){
+                    // TRANSFORMER INFECTED EN HEALTHY !
+                    HealthyPerson pers = New HealthyPersonne(i);
+                    // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+                }  
+            }
+        
+            if(DeathCounter <= 0){
+                //SUPPRIMER DOCTOR DE LA LISTE
+                mlist.remove(i);
+            }
+        }
+        
+        for(InfectedPerson i : iList){
+            int x = i.curCase.x;
+            int y = i.curCase.y;
+            if(city.getCase(x-1, y-1).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x-1, y).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x, y-1).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x-1, y+1).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x+1, y).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x, y+1).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x+1, y+1).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
+            if(city.getCase(x+1, y-1).getPerson().getClass().equals(DoctorPerson)){
+                // TRANSFORMER INFECTED EN HEALTHY !
+                HealthyPerson pers = New HealthyPersonne(i);
+                // Supprimer InfectedPerson de la liste, ajouter HealthyPerson dans la liste !
+            }
         }
         */
     }
