@@ -140,6 +140,47 @@ public class MainWindowController implements Initializable {
     }
 
     
+    public void humanityWin(Boolean b){
+        Stage stage = new Stage();
+        stage.setTitle("Game Over");
+        
+        
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        
+        Label scenetitle;
+        
+        if(b){
+            scenetitle = new Label("Humanity survived !");
+        }else{
+            scenetitle = new Label("Infected killed everyone !");
+        }
+        scenetitle.setWrapText(true);
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        grid.add(scenetitle, 0, 0, 3, 3);
+        scenetitle.setId("title");
+        
+        Button btn = new Button("Ok");
+        grid.add(btn, 2, 4);
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                    stage.close();
+            }
+        });
+
+        
+        Scene scene = new Scene(grid, 400, 200);
+        scene.getStylesheets().add(MainWindowController.class.getResource("/css/main.css").toExternalForm());
+        stage.setScene(scene);
+        
+        stage.showAndWait();
+    }
+    
     /**
      * Initializes the controller class.
      */

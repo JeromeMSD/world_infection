@@ -49,7 +49,7 @@
             <Label text="Healthy personne number :" wrapText="true" />
             <Spinner fx:id="heathlyPersonneNumber" editable="true" >
                 <valueFactory>
-                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="25" amountToStepBy="1"/>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="15" amountToStepBy="1"/>
                 </valueFactory>
             </Spinner>
         </HBox>   
@@ -58,7 +58,7 @@
             <Label text="Infected personne number :" wrapText="true" />
             <Spinner fx:id="infectedPersonneNumber" editable="true" >
                 <valueFactory>
-                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="1" amountToStepBy="1"/>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="5" amountToStepBy="1"/>
                 </valueFactory>
             </Spinner>
         </HBox> 

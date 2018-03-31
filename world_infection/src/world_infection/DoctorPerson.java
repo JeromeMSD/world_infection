@@ -73,13 +73,14 @@ public class DoctorPerson extends Person{
                 }
             }while(newY < 0 || newY > city.getSizeY()-1);
 
+            if(city.isEmpty(newX, newY)){
+                Case c  = city.getCase(newX, newY);
 
-            Case c  = city.getCase(newX, newY);
+                this.curCase.setPerson(null);
 
-            this.curCase.setPerson(null);
-
-            c.setPerson(this);
-            this.curCase = c;
+                c.setPerson(this);
+                this.curCase = c;
+            }
         }
     }   
     

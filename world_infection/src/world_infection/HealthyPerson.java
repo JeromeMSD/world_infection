@@ -52,13 +52,12 @@ public class HealthyPerson extends Person{
             }
         }while(newY < 0 || newY > city.getSizeY()-1);
         
-        
-        Case c  = city.getCase(newX, newY);
-        
-        this.curCase.setPerson(null);
-        
-        c.setPerson(this);
-        this.curCase = c;
+        if(city.isEmpty(newX, newY)){
+            Case c  = city.getCase(newX, newY);
+            this.curCase.setPerson(null);
+            c.setPerson(this);
+            this.curCase = c;
+        }
 
     }   
     
