@@ -22,7 +22,7 @@ public class Game implements Runnable{
     private List<DoctorPerson> dList = new ArrayList<>();
     private List<DeadPerson> mList = new ArrayList<>();
     private List<Person> globalList = new ArrayList<>();
-    private int cpt = 0;
+    private int cpt = 0, deletedDeads = 0;
     private boolean running = false;
     private MainWindowController mwc;
     
@@ -42,12 +42,13 @@ public class Game implements Runnable{
         this.mwc.display(city);
     }
     
-    public Game(MainWindowController mwc ,int nbH,int nbI) {
+    public Game(MainWindowController mwc ,int nbH,int nbI,int nbD) {
         this.mwc = mwc;
         this.city = new City(20,20);
-        generatePeople(nbH,nbI,5);
+        generatePeople(nbH,nbI,nbD);
         this.mwc.cleanDisplay();
         this.mwc.display(city);
+        this.mwc.setCpt(cpt, hList.size(), iList.size(), dList.size(), mList.size(), deletedDeads);
     }
     
     
@@ -72,7 +73,7 @@ public class Game implements Runnable{
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    mwc.setCpt(cpt);
+                    mwc.setCpt(cpt, hList.size(), iList.size(), dList.size(), mList.size(), deletedDeads);
                     mwc.cleanDisplay();
                     mwc.display(city);
                 }
@@ -84,12 +85,14 @@ public class Game implements Runnable{
             Platform.runLater(() -> {
                 mwc.humanityWin(false);
             });
-            System.out.println("Humanity survived to infection !");
+            
+            System.out.println("Infected killed everyone !");
+ 
         }else if(iList.isEmpty()){
             Platform.runLater(() -> {
                 mwc.humanityWin(true);
             });
-            System.out.println("Infected killed everyone !");
+            System.out.println("Humanity survived to infection !");
         }else{
             System.out.println("Game stopped by user !");
         }
@@ -108,10 +111,7 @@ public class Game implements Runnable{
         
         rulesForDoctor();
         
-        rulesForDead();
-        
         rulesForInfected();
-        
         
     }
     
@@ -122,8 +122,22 @@ public class Game implements Runnable{
         for(HealthyPerson h : hList){
             int x = h.curCase.x;
             int y = h.curCase.y;
-            int infection =0;
+            int infection = 0;
             
+            for(int i = -1; i < 2; i++){
+                for(int j = -1; j < 2; j++){
+                    if( ((x+i > -1) && (x+i < city.getSizeX())) && ((y+j > -1) && (y+j < city.getSizeX())) && !city.getCase(x+i, y+j).isEmpty()){
+                        if(city.getCase(x+i,y+j).getPerson().getClass().equals(InfectedPerson.class)){
+                            infection = infection + 1;
+                        }
+
+                        if(city.getCase(x+i,y+j).getPerson().getClass().equals(DeadPerson.class)){
+                            infection = infection + 3;
+                        }
+                    }
+                }
+            }
+            /*
             if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x-1, y-1).isEmpty()){
                 if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson.class)){
                     infection ++;
@@ -203,6 +217,7 @@ public class Game implements Runnable{
                     infection = infection+3;
                 }
             }
+            */
             
             
             if(infection >= 3){
@@ -232,7 +247,24 @@ public class Game implements Runnable{
             int y = d.curCase.y;
             int infection =0;
             
-             
+            for(int i = -1; i < 2; i++){
+                for(int j=-1; j < 2; j++){
+                    if( ((x+i > -1) && (x+i < city.getSizeX())) && ((y+j > -1) && (y+j < city.getSizeX())) && !city.getCase(x+i, y+j).isEmpty()){
+                        if(city.getCase(x+i,y+j).getPerson().getClass().equals(InfectedPerson.class)){
+                            infection ++;
+                        }
+
+                        if(city.getCase(x+i,y+j).getPerson().getClass().equals(DeadPerson.class)){
+                            infection = infection + 2;
+                            mList.remove( (DeadPerson) city.getCase(x+i, y+j).getPerson());
+                            deletedDeads++;
+                            city.getCase(x+i,y+i).setPerson(null);
+                        }
+                    }
+                }
+            }
+            
+            /*
             if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x-1, y-1).isEmpty()){
                 if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson.class)){
                     infection ++;
@@ -312,15 +344,16 @@ public class Game implements Runnable{
                     infection = infection+3;
                 }
             }
+            */
             
             if(infection>=5){
                 // DOCTOR CONDAMNED !
                 if (d.getDeadCounter() < 10){
                     //ALREADY CONDAMN
                     d.setDeadCounter(d.getDeadCounter()-3);
-                }else{
-                    d.infect();
                 }
+                
+                d.infect();
                 
             }else{
                 //Soigne infectés en contact direct
@@ -392,7 +425,9 @@ public class Game implements Runnable{
             }
         }
         dList.removeAll(dL);
+        globalList.removeAll(dL);
         iList.removeAll(iL);
+        globalList.removeAll(iL);
         
     }
     
@@ -406,84 +441,14 @@ public class Game implements Runnable{
                 DeadPerson deadPers = new DeadPerson(i);
                 mList.add(deadPers);
                 city.getCase(i.curCase).setPerson(deadPers);
-                globalList.add(deadPers);
+                //globalList.add(deadPers);
             }
         }
 
         iList.removeAll(iL);
+        globalList.removeAll(iL);
     }
-    
-    private void rulesForDead(){
-        
-        ArrayList<DeadPerson> mL = new ArrayList<>();
-        
-        for(DeadPerson m : mList){
-            int x = m.curCase.x;
-            int y = m.curCase.y;
-            
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x-1, y-1).isEmpty()){
-                if(city.getCase(x-1, y-1).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-           
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y > -1) && (y < city.getSizeX())) && !city.getCase(x-1, y).isEmpty()){
-                if(city.getCase(x-1, y).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-            
-            if( ((x > -1) && (x < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x, y-1).isEmpty()){
-                if(city.getCase(x, y-1).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-            
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x-1, y+1).isEmpty()){
-                if(city.getCase(x-1, y+1).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y > -1) && (y < city.getSizeX())) && !city.getCase(x+1, y).isEmpty()){
-                if(city.getCase(x+1, y).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-            
-            if( ((x > -1) && (x < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x, y+1).isEmpty()){
-                if(city.getCase(x, y+1).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x+1, y+1).isEmpty()){
-                if(city.getCase(x+1, y+1).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x+1, y-1).isEmpty()){
-                if(city.getCase(x+1, y-1).getPerson().getClass().equals(DoctorPerson.class)){
-                    if(!mL.contains(m))
-                        mL.add(m);
-                }
-            }      
-        }
 
-        mList.removeAll(mL);
-        globalList.removeAll(mL);
-    }
-    
-    
-    
     private void displayText(){
         System.out.println(city.displayText());
     }

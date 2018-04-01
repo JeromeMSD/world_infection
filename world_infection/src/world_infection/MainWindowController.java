@@ -49,13 +49,26 @@ public class MainWindowController implements Initializable {
     private Spinner infectedPersonneNumber;
     @FXML
     private Spinner heathlyPersonneNumber;
+    @FXML
+    private Spinner doctorNumber;
+    
+    @FXML
+    private Label remainingH;
+    @FXML
+    private Label remainingI;
+    @FXML
+    private Label remainingD;
+    @FXML
+    private Label remainingM;
+    @FXML
+    private Label cleanedM;
     
     private Game g;
     private Thread gameThread;
     
     @FXML
     public void reset(){
-        g = new Game(this,(Integer) heathlyPersonneNumber.getValue(), (Integer) infectedPersonneNumber.getValue());
+        g = new Game(this,(Integer) heathlyPersonneNumber.getValue(), (Integer) infectedPersonneNumber.getValue(), (Integer) doctorNumber.getValue());
         gameThread = new Thread(g);
     }
     
@@ -189,8 +202,14 @@ public class MainWindowController implements Initializable {
         // TODO
     }    
 
-    void setCpt(int cpt) {
-        counter.setText(cpt+"");
+    void setCpt(int roundCpt, int remainingHealthy, int remainingInfected, int remainingDoctor, int remainingDead, int cleanedDead) {
+        counter.setText(roundCpt+"");
+        remainingH.setText(remainingHealthy+"");
+        remainingI.setText(remainingInfected+"");
+        remainingD.setText(remainingDoctor+"");
+        remainingM.setText(remainingDead+"");
+        cleanedM.setText(cleanedDead+"");
+        
     }
     
 }

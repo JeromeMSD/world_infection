@@ -45,8 +45,33 @@
         
         <Pane fx:id="pane" GridPane.columnIndex="1" GridPane.columnSpan="9" GridPane.rowIndex="1" GridPane.rowSpan="10" />
         
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="12" GridPane.columnSpan="4" GridPane.rowSpan="2"  >
-            <Label text="Healthy personne number :" wrapText="true" />
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="11" GridPane.columnSpan="4" >
+            <Label text="Remaning Healthy Person : "/>
+            <Label fx:id="remainingH" text="0"/>
+        </HBox>
+        
+        <HBox GridPane.columnIndex="4" GridPane.rowIndex="11" GridPane.columnSpan="4" >
+            <Label text="Remaning Infected Person : "/>
+            <Label fx:id="remainingI" text="0"/>
+        </HBox>
+        
+        <HBox GridPane.columnIndex="7" GridPane.rowIndex="11" GridPane.columnSpan="4" >
+            <Label text="Remaning Doctor Person : "/>
+            <Label fx:id="remainingD" text="0"/>
+        </HBox>
+        
+        <HBox GridPane.columnIndex="2" GridPane.rowIndex="11" GridPane.columnSpan="4" alignment="CENTER" GridPane.valignment="BOTTOM" >
+            <Label text="Remaning Dead Person : "/>
+            <Label fx:id="remainingM" text="0"/>
+        </HBox>
+        
+        <HBox GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.columnSpan="4" alignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label text="Cleaned Dead Person : "/>
+            <Label fx:id="cleanedM" text="0"/>
+        </HBox>
+        
+        <HBox GridPane.columnIndex="1" GridPane.rowIndex="11" GridPane.columnSpan="3" GridPane.rowSpan="2" alignment="CENTER_LEFT"  >
+            <Label text="Healthy person number :" wrapText="true" />
             <Spinner fx:id="heathlyPersonneNumber" editable="true" >
                 <valueFactory>
                     <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="15" amountToStepBy="1"/>
@@ -54,8 +79,8 @@
             </Spinner>
         </HBox>   
         
-        <HBox GridPane.columnIndex="6" GridPane.rowIndex="12" GridPane.columnSpan="4" GridPane.rowSpan="2" >
-            <Label text="Infected personne number :" wrapText="true" />
+        <HBox GridPane.columnIndex="7" GridPane.rowIndex="11" GridPane.columnSpan="3" GridPane.rowSpan="2" alignment="CENTER_RIGHT" >
+            <Label text="Infected person number :" wrapText="true" />
             <Spinner fx:id="infectedPersonneNumber" editable="true" >
                 <valueFactory>
                     <SpinnerValueFactory.IntegerSpinnerValueFactory min="1" max="100" initialValue="5" amountToStepBy="1"/>
@@ -63,9 +88,18 @@
             </Spinner>
         </HBox> 
         
+        <HBox GridPane.columnIndex="4" GridPane.rowIndex="12" GridPane.columnSpan="3" GridPane.rowSpan="1" alignment="BOTTOM_CENTER" >
+            <Label text="Doctor number :" wrapText="true" />
+            <Spinner fx:id="doctorNumber" editable="true" >
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="100" initialValue="5" amountToStepBy="1"/>
+                </valueFactory>
+            </Spinner>
+        </HBox>   
+        
         <Button onAction="#reset" styleClass="btn" GridPane.columnIndex="2" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Reset</Button>
         <VBox GridPane.columnIndex="5" GridPane.rowIndex="13" alignment="CENTER" >
-            <Label text="Tour"/>
+            <Label text="Round"/>
             <Label fx:id="counter" text="0" />
         </VBox>            
         <Button fx:id="play" onAction="#play"  styleClass="btn" GridPane.columnIndex="7" GridPane.rowIndex="13" GridPane.columnSpan="2" GridPane.halignment="CENTER" >Play</Button>            
