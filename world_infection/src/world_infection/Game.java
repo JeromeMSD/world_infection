@@ -106,13 +106,10 @@ public class Game implements Runnable{
     }
     
     private void rules(){
-        
         rulesForHealthy();
-        
         rulesForDoctor();
-        
         rulesForInfected();
-        
+        rulesForDeads();
     }
     
     private void rulesForHealthy(){
@@ -137,89 +134,6 @@ public class Game implements Runnable{
                     }
                 }
             }
-            /*
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x-1, y-1).isEmpty()){
-                if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x-1, y-1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-           
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y > -1) && (y < city.getSizeX())) && !city.getCase(x-1, y).isEmpty()){
-                if(city.getCase(x-1, y).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x-1, y).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x > -1) && (x < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x, y-1).isEmpty()){
-                if(city.getCase(x, y-1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x, y-1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x-1, y+1).isEmpty()){
-                if(city.getCase(x-1, y+1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x-1, y+1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y > -1) && (y < city.getSizeX())) && !city.getCase(x+1, y).isEmpty()){
-                if(city.getCase(x+1, y).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x+1, y).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x > -1) && (x < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x, y+1).isEmpty()){
-                if(city.getCase(x, y+1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x, y+1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x+1, y+1).isEmpty()){
-                if(city.getCase(x+1, y+1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x+1, y+1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x+1, y-1).isEmpty()){
-                if(city.getCase(x+1, y-1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x+1, y-1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            */
-            
-            
             if(infection >= 3){
                 // TRANSFORMER HEALTHY EN INFECTED !
                 hL.add(h);
@@ -256,96 +170,10 @@ public class Game implements Runnable{
 
                         if(city.getCase(x+i,y+j).getPerson().getClass().equals(DeadPerson.class)){
                             infection = infection + 2;
-                            mList.remove( (DeadPerson) city.getCase(x+i, y+j).getPerson());
-                            deletedDeads++;
-                            city.getCase(x+i,y+i).setPerson(null);
                         }
                     }
                 }
             }
-            
-            /*
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x-1, y-1).isEmpty()){
-                if(city.getCase(x-1, y-1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x-1, y-1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-           
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y > -1) && (y < city.getSizeX())) && !city.getCase(x-1, y).isEmpty()){
-                if(city.getCase(x-1, y).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x-1, y).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x > -1) && (x < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x, y-1).isEmpty()){
-                if(city.getCase(x, y-1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x, y-1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x-1 > -1) && (x-1 < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x-1, y+1).isEmpty()){
-                if(city.getCase(x-1, y+1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x-1, y+1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y > -1) && (y < city.getSizeX())) && !city.getCase(x+1, y).isEmpty()){
-                if(city.getCase(x+1, y).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x+1, y).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x > -1) && (x < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x, y+1).isEmpty()){
-                if(city.getCase(x, y+1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x, y+1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y+1 > -1) && (y+1 < city.getSizeX())) && !city.getCase(x+1, y+1).isEmpty()){
-                if(city.getCase(x+1, y+1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x+1, y+1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            
-            if( ((x+1 > -1) && (x+1 < city.getSizeX())) && ((y-1 > -1) && (y-1 < city.getSizeX())) && !city.getCase(x+1, y-1).isEmpty()){
-                if(city.getCase(x+1, y-1).getPerson().getClass().equals(InfectedPerson.class)){
-                    infection ++;
-                }
-                
-                if(city.getCase(x+1, y-1).getPerson().getClass().equals(DeadPerson.class)){
-                    infection = infection+3;
-                }
-            }
-            */
-            
             if(infection>=5){
                 // DOCTOR CONDAMNED !
                 if (d.getDeadCounter() < 10){
@@ -449,6 +277,29 @@ public class Game implements Runnable{
         globalList.removeAll(iL);
     }
 
+    private void rulesForDeads(){       
+        ArrayList<DeadPerson> mL = new ArrayList<>();
+        
+        for(DeadPerson m : mList){
+            int x = m.curCase.x;
+            int y = m.curCase.y;
+            
+            for(int i = -1; i < 2; i++){
+                    for(int j=-1; j < 2; j++){
+                        if( ((x+i > -1) && (x+i < city.getSizeX())) && ((y+j > -1) && (y+j < city.getSizeX())) && !city.getCase(x+i, y+j).isEmpty()){
+                            if(city.getCase(x+i,y+j).getPerson().getClass().equals(DoctorPerson.class)){
+                                mL.add(m);
+                                city.getCase(m.curCase).setPerson(null);
+                            }
+
+                        }
+                    }
+            }
+        }
+        deletedDeads = deletedDeads + mL.size();
+        mList.removeAll(mL);
+    }
+    
     private void displayText(){
         System.out.println(city.displayText());
     }
@@ -509,9 +360,6 @@ public class Game implements Runnable{
         
     }
     
-    
-    
-
     public void stop() {
         this.running = false;
     }
